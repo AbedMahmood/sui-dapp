@@ -1,62 +1,28 @@
-import { ConnectButton, useCurrentAccount, useSuiClient } from "@mysten/dapp-kit";
-import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes";
-import { useEffect, useState } from "react";
+import { ConnectButton, useCurrentAccount } from "@mysten/dapp-kit";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./assets/index.css";
 
 function App() {
   const currentAccount = useCurrentAccount();
-  const suiClient = useSuiClient();
-  const [balance, setBalance] = useState(null);
-  const MIST_PER_SUI = 1_000_000_000;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (!currentAccount || !suiClient) {
-      setBalance(null);
-      return;
+    console.log("[App] Current account detected:", currentAccount);
+    if (currentAccount) {
+      navigate("/welcome");
     }
-    suiClient.getBalance({ owner: currentAccount.address }).then(result => {
-      setBalance(result?.totalBalance ?? "0");
-    }).catch(() => setBalance("0"));
-  }, [currentAccount, suiClient]);
+  }, [currentAccount, navigate]);
 
   return (
-    <>
-      <Flex
-        position="sticky"
-        px="4"
-        py="2"
-        justify="between"
-        style={{
-          borderBottom: "1px solid var(--gray-a2)",
-        }}
-      >
-        <Box>
-          <Heading>dApp Starter Template</Heading>
-        </Box>
-        <Box>
-          <ConnectButton />
-        </Box>
-      </Flex>
-      <Container>
-        <Container
-          mt="5"
-          pt="2"
-          px="4"
-          style={{ background: "var(--gray-a2)", minHeight: 300 }}
-        >
-          {currentAccount ? (
-            <>
-              <Text>Connected to: {currentAccount.address}</Text>
-              <br />
-              <Text>
-                Balance: {balance !== null ? (Number(balance) / MIST_PER_SUI).toLocaleString(undefined, {maximumFractionDigits: 9}) : "Loading..."} SUI
-              </Text>
-            </>
-          ) : (
-            <Heading>Please connect your wallet</Heading>
-          )}
-        </Container>
-      </Container>
-    </>
+    <div className="app-root">
+      <div className="app-container">
+        <h1>SUI dApp</h1>
+        <p>Connect your Sui wallet to continue.</p>
+        <ConnectButton className="connect-button" />
+        <p className="footer-text">Powered by Mysten Dapp Kit</p>
+      </div>
+    </div>
   );
 }
 
