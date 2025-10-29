@@ -1,6 +1,6 @@
 ## SUI dAPP
 
-After spending significant time struggling to work with the SUI blockchain and attempting to follow their official examples without success, I decided to create my own documentation and starter templates. These templates will serve as reusable codebases and project starters to simplify future SUI dApp development.
+After spending significant time struggling to work with the SUI blockchain and attempting to follow their official examples without success on my part, I decided to create my own documentation and starter templates. These templates will serve as reusable codebases and project starters to simplify future SUI dApp development.
 
 You can explore this repository and track the progress through the commits for changes and development updates.
 

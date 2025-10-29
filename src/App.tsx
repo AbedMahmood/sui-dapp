@@ -8,16 +8,15 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("[App] Current account detected:", currentAccount);
     if (currentAccount) {
-      navigate("/welcome");
+      navigate("/create-object");
     }
   }, [currentAccount, navigate]);
 
   return (
     <div className="app-root">
       <div className="app-container">
-        <h1>SUI dApp</h1>
+        <h1>Sui dApp</h1>
         <p>Connect your Sui wallet to continue.</p>
         <ConnectButton className="connect-button" />
         <p className="footer-text">Powered by Mysten Dapp Kit</p>
